@@ -1,14 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const cors=require('cors')
-const dotenv = require('dotenv')
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://user:pass@cluster0.r2lzi.mongodb.net/volenteer?retryWrites=true&w=majority";
+const uri = "mongodb+srv://dbUser:1WvneRdXgVtpjYLh@cluster0.r2lzi.mongodb.net/volenteer?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true ,useUnifiedTopology: true});
 const ObjectId=require('mongodb').ObjectID;
 const { route } = require('.');
-const user=process.env.DB_USER
-const pass=process.env.DB_USER
+
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
