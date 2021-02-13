@@ -34,7 +34,9 @@ client.connect(err => {
 });
  
 router.get('/find',(req,res)=>{
-  collection.find({})
+  const search=req.query.search;
+  console.log("Search",search);
+  collection.find({"data.title":{$regex:search}})
   .toArray((err,documents)=>{
     res.send(documents)
   })
@@ -70,8 +72,8 @@ router.get('/eventTask/:email',(req,res)=>{
 router.delete('/delete/:id',(req,res) =>{
   console.log(req.params.id);
   regCollection.deleteOne({_id:ObjectId(req.params.id)})
-  .then(ressult=>{
-    res.send(ressult.deletedCount>0);
+  .then(result=>{
+    res.send(result.deletedCount>0);
   })
 })
 
@@ -82,6 +84,13 @@ router.get('/list',(req,res)=>{
   })
 })
 
+router.delete('/deletereg/:id',(req,res)=>{
+  console.log(req.param.id);
+  regCollection.deleteOne({_id:ObjectId(req.param.id)})
+  .then(result=>{
+    res.send(result.deletedCount>0)
+  })
+})
   console.log("connected");
   // client.close();
 });
